@@ -5,7 +5,8 @@ class Blackjack{
         $this->score == $start_point;
     }
     public function hit(){
-
+        $card = rand(1,11);
+        $this->score +=$card;
     }
     public function stand(){
 
