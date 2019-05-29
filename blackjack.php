@@ -19,17 +19,6 @@ class Blackjack{
     }
 }
 
-// if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-//     session_start();
-//     $player = new Blackjack();
-//     $dealer = new Blackjack();
-//     $_SESSION['game'] = [$player, $dealer];
-//     header("Location: home.php");
-//     exit();
-// }else{
-//     header("Location: home.php");
-//     exit();
-// }
 
 ?>
