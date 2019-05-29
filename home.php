@@ -5,24 +5,31 @@ session_start();
 if(isset($_SESSION['game'])){
        $player = $_SESSION['game'][0];
        $dealer = $_SESSION['game'][1];
-       if($player->score == 21){
-        echo "<p class=\"d-block w-75 mt-5 p-2 bg-danger text-white text-center mx-auto\">You won</p>";
-        unset($_SESSION['game']);
+        var_dump($_SESSION['game']);
+       if($player->status == "surrender"){
+            echo "<p class=\"d-block w-75 mt-5 p-2 bg-danger text-white text-center mx-auto\">You lose!</p>";
+        }elseif($player->status == "stand"){
+           if($dealer->score<21){
+                if($player->score > $dealer->score){
+                echo "<p class=\"d-block w-75 mt-5 p-2 bg-danger text-white text-center mx-auto\">You won!</p>";
+                }elseif($player->score == $dealer->score){
+                echo "<p class=\"d-block w-75 mt-5 p-2 bg-danger text-white text-center mx-auto\">You lose!</p>";
+                }else{
+                echo "<p class=\"d-block w-75 mt-5 p-2 bg-danger text-white text-center mx-auto\">You lose!</p>";
+                }
+           }elseif($dealer->score == 21){
+            echo "<p class=\"d-block w-75 mt-5 p-2 bg-danger text-white text-center mx-auto\">You lose!</p>";
+           }else{
+            echo "<p class=\"d-block w-75 mt-5 p-2 bg-danger text-white text-center mx-auto\">You won!</p>";
+           }
 
-         }
-       if($player->score<=21 AND $player->status == "stand"){
-            if($player->score > $dealer->score){
-                echo "<p class=\"d-block w-75 mt-5 p-2 bg-danger text-white text-center mx-auto\">You won</p>";
-            }elseif($player->score == $dealer->score){
-                echo "<p class=\"d-block w-75 mt-5 p-2 bg-danger text-white text-center mx-auto\">It's a draw</p>";
-            }else{
-                echo "<p class=\"d-block w-75 mt-5 p-2 bg-danger text-white text-center mx-auto\">You lose</p>";
-            }
+        }elseif($player->score == 21){
+            echo "<p class=\"d-block w-75 mt-5 p-2 bg-danger text-white text-center mx-auto\">You won!</p>";
+        }elseif($player->score > 21){
+            echo "<p class=\"d-block w-75 mt-5 p-2 bg-danger text-white text-center mx-auto\">You lose!</p>";
+        }else{
+            "<p class=\"d-block w-75 mt-5 p-2 bg-danger text-white text-center mx-auto\">Good luck!</p>";
         }
-        if($player->status == "surrender"){
-            echo "<p class=\"d-block w-75 mt-5 p-2 bg-danger text-white text-center mx-auto\">You lose</p>";
-        }
-              
     }
 ?>
 
@@ -95,8 +102,8 @@ if(isset($_SESSION['game'])){
         </div>
     </div>
     <form action="clearsession.php">
-        <button type="submit" class="d-block mt-5 mx-auto btn btn-outline-success d-<?php
-     if(isset($_SESSION['game']) && $player->score<21){
+        <button type="submit" class=" d-block mt-5 mx-auto btn btn-outline-success d-<?php
+     if (isset($_SESSION['game'])){
          echo "none";
     }else{
         echo "block";
