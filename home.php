@@ -5,8 +5,7 @@ session_start();
 if(isset($_SESSION['game'])){
        $player = $_SESSION['game'][0];
        $dealer = $_SESSION['game'][1];
-        var_dump($_SESSION['game']);
-       if($player->status == "surrender"){
+        if($player->status == "surrender"){
             echo "<p class=\"d-block w-75 mt-5 p-2 bg-danger text-white text-center mx-auto\">You lose!</p>";
         }elseif($player->status == "stand"){
            if($dealer->score<21){
@@ -24,11 +23,13 @@ if(isset($_SESSION['game'])){
            }
 
         }elseif($player->score == 21){
+            $player->status = "won";
             echo "<p class=\"d-block w-75 mt-5 p-2 bg-danger text-white text-center mx-auto\">You won!</p>";
         }elseif($player->score > 21){
+            $player->status = "lose";
             echo "<p class=\"d-block w-75 mt-5 p-2 bg-danger text-white text-center mx-auto\">You lose!</p>";
         }else{
-            "<p class=\"d-block w-75 mt-5 p-2 bg-danger text-white text-center mx-auto\">Good luck!</p>";
+           echo "<p class=\"d-block w-75 mt-5 p-2 bg-succes text-white text-center mx-auto\">Good luck!</p>";
         }
     }
 ?>
@@ -48,18 +49,17 @@ if(isset($_SESSION['game'])){
 
 <body>
     <form action="game.php" method="post"
-        class="d-<?php if(isset($_POST['start']) || isset($_SESSION['game'])){echo "none";}else{echo "block";} ?>">
+        <?php if(isset($_POST['start']) || isset($_SESSION['game'])){echo "hidden";}else{echo "show";} ?>>
         <button type="submit" name="start" class="btn btn-outline-success d-block mx-auto mt-5 start">START</button>
     </form>
     <div
-        class="container mt-5 bg-dark rounded shadow py-5 px-5 mx-auto d-<?php if(isset($_SESSION['game'])){echo "block";}else{echo "none";} ?>">
+        class="container mt-5 bg-dark rounded shadow py-5 px-5 mx-auto"<?php if(isset($_SESSION['game'])){echo "show";}else{echo "hidden";} ?>>
         <div class="row text-center">
             <div class="col">
                 <p class="bg-light py-2 px-2 play text-dark">Player</p>
                 <div class="bg-light play py-5 px-5 text-dark"><?php 
                     if(isset($_SESSION['game'])){
-                       // var_dump($_SESSION['game'][0]);
-                       echo $player->score;
+                        echo $player->score;
                     }
                     ?></div>
             </div>
@@ -73,14 +73,13 @@ if(isset($_SESSION['game'])){
             </div>
         </div>
     </div>
-    <div class="container mt-5 bg-dark rounded shadow py-5 px-5  d-<?php
-     if(isset($_SESSION['game']) && $player->score<21){
-         echo "block";
+    <div class="container mt-5 bg-dark rounded shadow py-5 px-5"<?php
+     if(isset($_SESSION['game']) AND $player->score<21 AND $player->status =="start"){
+         echo "show";
     }else{
-        echo "none";
+        echo "hidden";
     }
-     
-     ?>">
+     ?>>
         <div class="row">
             <div class="col">
                 <form action="game.php" method="post">
@@ -101,13 +100,21 @@ if(isset($_SESSION['game'])){
             </div>
         </div>
     </div>
-    <form action="clearsession.php">
-        <button type="submit" class=" d-block mt-5 mx-auto btn btn-outline-success d-<?php
-     if (isset($_SESSION['game'])){
-         echo "none";
-    }else{
-        echo "block";
-    }?>">Play again</button>
+    <form action="clearsession.php" method="post" <?php
+
+     if(isset($_SESSION['game'])){
+         if($player->score>21 AND $player->status !=="start"){
+            echo "show";
+         }else{
+            echo "hidden";
+         }
+        
+     }else{
+        echo "hidden";
+     }
+    
+    ?>>
+        <button type="submit" class="mt-5 btn btn-outline-success mx-auto d-block" name="play_again">Play again</button>
     </form>
 
 </body>
