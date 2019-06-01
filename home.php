@@ -5,7 +5,8 @@ session_start();
 if(isset($_SESSION['game'])){
        $player = $_SESSION['game'][0];
        $dealer = $_SESSION['game'][1];
-        if($player->status == "surrender"){
+        var_dump($_SESSION['game']);
+       if($player->status == "surrender"){
             echo "<p class=\"d-block w-75 mt-5 p-2 bg-danger text-white text-center mx-auto\">You lose!</p>";
         }elseif($player->status == "stand"){
            if($dealer->score<21){
@@ -103,7 +104,7 @@ if(isset($_SESSION['game'])){
     <form action="clearsession.php" method="post" <?php
 
      if(isset($_SESSION['game'])){
-         if($player->score>21 AND $player->status !=="start"){
+         if($player->score>21 || $player->status !=="start"){
             echo "show";
          }else{
             echo "hidden";
