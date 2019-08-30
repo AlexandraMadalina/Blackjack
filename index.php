@@ -5,7 +5,7 @@ session_start();
 if(isset($_SESSION['game'])){
        $player = $_SESSION['game'][0];
        $dealer = $_SESSION['game'][1];
-        var_dump($_SESSION['game']);
+        // var_dump($_SESSION['game']);
        if($player->status == "surrender"){
             echo "<p class=\"d-block w-75 mt-5 p-2 bg-danger text-white text-center mx-auto\">You lose!</p>";
         }elseif($player->status == "stand"){
