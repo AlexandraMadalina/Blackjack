@@ -29,9 +29,9 @@ The main purpose of the exercise is to get familiar with classes.
 * I used the forms from `index.php` to send to the `game.php` page what the player's action is. ( hit/stand/surrender)
 * I used the class' methods to react to these actions in a switch statement.
 * The final result is based on the following logic:
-  _ When the player `hit` the server draws a card between 1-11, and add it to his total score.
-  _ If the player reaches >21, then the message `You lose!` is displayed.
+  - When the player `hit` the server draws a card between 1-11, and add it to his total score.
+  - If the player reaches >21, then the message `You lose!` is displayed.
   - If the player stands before that, the dealer starts drawing cards until he reaches >15.
-  * The server checks the difference between the playr's result and that of the dealer.
-  * The person with the biggest score (that is still lower than 22) wins the hand (If equal the dealer wins).
-  * At any point the player is able to click`surrender` after which the message `You lose!` is diplayed and simulates the dealer's score
+  - The server checks the difference between the playr's result and that of the dealer.
+  - The person with the biggest score (that is still lower than 22) wins the hand (If equal the dealer wins).
+  - At any point the player is able to click`surrender` after which the message `You lose!` is diplayed and simulates the dealer's score
