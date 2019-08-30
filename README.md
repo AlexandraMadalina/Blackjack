@@ -35,3 +35,7 @@ The main purpose of the exercise is to get familiar with classes.
   - The server checks the difference between the playr's result and that of the dealer.
   - The person with the biggest score (that is still lower than 22) wins the hand (If equal the dealer wins).
   - At any point the player is able to click`surrender` after which the message `You lose!` is diplayed and simulates the dealer's score
+
+## Results
+
+You can see the results [here](https://black-jack-php.herokuapp.com/)
