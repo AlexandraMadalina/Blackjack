@@ -2,5 +2,5 @@
 session_start();
 session_unset();
 session_destroy();
-header("Location: home.php?message=clear");
+header("Location: index.php?message=clear");
 ?>

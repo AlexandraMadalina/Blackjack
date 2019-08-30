@@ -11,18 +11,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $player = new Blackjack();
         $dealer = new Blackjack();
         $_SESSION['game'] = [$player, $dealer];
-        header("Location: home.php");
+        header("Location: index.php");
         break;
         case isset($_POST['hit']):
         $player->hit();
-        header("Location: home.php");
+        header("Location: index.php");
         break;
         case isset($_POST['stand']):
         $player->stand();
         while($dealer->score<15){
             $dealer->hit();
         }
-        header("Location: home.php");
+        header("Location: index.php");
         
         break;
         case isset($_POST['surrender']):
@@ -30,7 +30,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $dealer->hit();
         }
         $player->surrender();
-        header("Location: home.php");
+        header("Location: index.php");
         
     }  
 
